@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --accent: #00FFB2;
+    --accent-dim: rgba(0, 255, 178, 0.15);
+    --accent-glow: rgba(0, 255, 178, 0.4);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    @apply bg-dark-900 text-slate-100 transition-colors duration-300;
+  }
+
+  body.light {
+    @apply bg-slate-50 text-slate-900;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 178, 0.3);
+    border-radius: 3px;
+  }
+
+  ::selection {
+    background: rgba(0, 255, 178, 0.3);
+    color: white;
+  }
+}
+
+@layer components {
+  .glow-text {
+    text-shadow: 0 0 30px rgba(0, 255, 178, 0.5);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 0 1px rgba(0, 255, 178, 0.3), 0 0 30px rgba(0, 255, 178, 0.1);
+  }
+
+  .glass {
+    background: rgba(10, 21, 16, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 255, 178, 0.1);
+  }
+
+  .glass-light {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(13, 149, 101, 0.15);
+  }
+
+  .section-padding {
+    @apply px-6 md:px-12 lg:px-24 py-24;
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, #00FFB2, #00C8FF, #00FFB2);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .noise-overlay::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+  }
+
+  .floating-icon {
+    position: absolute;
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  .tech-card {
+    @apply relative overflow-hidden rounded-2xl border border-white/5 bg-dark-800/50 p-6 transition-all duration-500;
+  }
+
+  .tech-card:hover {
+    @apply border-[rgba(0,255,178,0.3)] -translate-y-2;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 255, 178, 0.2), inset 0 1px 0 rgba(0, 255, 178, 0.1);
+  }
+
+  .project-card {
+    @apply relative overflow-hidden rounded-2xl border border-white/5 transition-all duration-500 cursor-pointer;
+    background: linear-gradient(135deg, rgba(10,21,16,0.8) 0%, rgba(15,32,24,0.8) 100%);
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,255,178,0.25);
+  }
+
+  .btn-primary {
+    @apply relative inline-flex items-center gap-2 px-6 py-3 rounded-xl font-display font-semibold text-sm tracking-wide overflow-hidden transition-all duration-300;
+    background: linear-gradient(135deg, #00FFB2, #00C8FF);
+    color: #050D0A;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(0, 255, 178, 0.4);
+  }
+
+  .btn-outline {
+    @apply relative inline-flex items-center gap-2 px-6 py-3 rounded-xl font-display font-semibold text-sm tracking-wide border border-[rgba(0,255,178,0.4)] text-[#00FFB2] transition-all duration-300;
+    background: rgba(0, 255, 178, 0.05);
+  }
+
+  .btn-outline:hover {
+    @apply border-[rgba(0,255,178,0.8)];
+    background: rgba(0, 255, 178, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 255, 178, 0.2);
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(var(--orbit-radius, 120px)) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(var(--orbit-radius, 120px)) rotate(-360deg); }
+}
+
+@keyframes particle-float {
+  0% { transform: translateY(100vh) translateX(0px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100px) translateX(var(--drift, 50px)); opacity: 0; }
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #00FFB2;
+  border-radius: 50%;
+  animation: particle-float linear infinite;
+  opacity: 0;
+}
