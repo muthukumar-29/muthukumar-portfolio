@@ -84,7 +84,7 @@ export default function Contact({ darkMode }) {
     setErrorMsg('')
 
     try {
-      const res = await fetch(N8N_WEBHOOK_URL, {
+      const res = await fetch(`${N8N_WEBHOOK_URL}/contact-form`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
