@@ -284,7 +284,7 @@ export default function Hero({ darkMode }) {
         </motion.div>
 
         {/* Stats row */}
-        <motion.div variants={itemVariants} className="flex items-center justify-center gap-8 md:gap-12 mt-16">
+        {/* <motion.div variants={itemVariants} className="flex items-center justify-center gap-8 md:gap-12 mt-16">
           {[
             { value: '2+', label: 'Years Experience' },
             { value: '6+', label: 'Projects Shipped' },
@@ -297,7 +297,7 @@ export default function Hero({ darkMode }) {
               <div className={`text-xs font-mono mt-1 ${darkMode ? 'text-slate-500' : 'text-slate-500'}`}>{label}</div>
             </div>
           ))}
-        </motion.div>
+        </motion.div> */}
       </motion.div>
 
       {/* Scroll indicator */}
