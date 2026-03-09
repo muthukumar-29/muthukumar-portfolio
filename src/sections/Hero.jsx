@@ -239,7 +239,7 @@ export default function Hero({ darkMode }) {
               : 'border-primary-300 bg-primary-50 text-primary-700'
           }`}>
             <Sparkles size={12} />
-            <span>AI Automation Engineer @ Automaitee</span>
+            <span>Full Stack Dev · AI Automation · Automaitee</span>
             <motion.span
               className="inline-block w-2 h-2 rounded-full bg-[#00FFB2]"
               animate={{ opacity: [1, 0.3, 1] }}
@@ -260,8 +260,8 @@ export default function Hero({ darkMode }) {
         {/* Role & description */}
         <motion.div variants={itemVariants}>
           <p className={`font-body text-lg md:text-xl max-w-2xl mx-auto mt-6 leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-            Building intelligent automation systems, AI agents, and workflow pipelines
-            that transform how businesses operate — from idea to{' '}
+            Full Stack Developer & AI Automation Engineer. Building intelligent workflows,
+            workflows, and integrations that transform how businesses operate — from idea to{' '}
             <span className={darkMode ? 'text-[#00FFB2]' : 'text-primary-600'}>production</span>.
           </p>
         </motion.div>
@@ -284,11 +284,11 @@ export default function Hero({ darkMode }) {
         </motion.div>
 
         {/* Stats row */}
-        {/* <motion.div variants={itemVariants} className="flex items-center justify-center gap-8 md:gap-12 mt-16">
+        <motion.div variants={itemVariants} className="flex items-center justify-center gap-8 md:gap-12 mt-16">
           {[
-            { value: '50+', label: 'Automations Built' },
-            { value: '15+', label: 'AI Integrations' },
-            { value: '3+', label: 'Years Experience' },
+            { value: '2+', label: 'Years Experience' },
+            { value: '6+', label: 'Projects Shipped' },
+            { value: '8.6', label: 'MCA CGPA' },
           ].map(({ value, label }) => (
             <div key={label} className="text-center">
               <div className={`font-display font-bold text-2xl md:text-3xl ${darkMode ? 'text-white' : 'text-slate-900'}`}>
@@ -297,7 +297,7 @@ export default function Hero({ darkMode }) {
               <div className={`text-xs font-mono mt-1 ${darkMode ? 'text-slate-500' : 'text-slate-500'}`}>{label}</div>
             </div>
           ))}
-        </motion.div> */}
+        </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}

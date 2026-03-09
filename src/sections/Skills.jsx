@@ -3,27 +3,14 @@ import { motion, useInView } from 'framer-motion'
 
 const skillCategories = [
   {
-    title: 'AI Automation',
+    title: 'AI & Automation',
     color: '#00FFB2',
     icon: '🤖',
     skills: [
-      { name: 'n8n', level: 95 },
-      { name: 'OpenAI API', level: 90 },
-      { name: 'AI Agents', level: 88 },
-      // { name: 'LangChain', level: 78 },
-      // { name: 'Make (Integromat)', level: 82 },
-    ]
-  },
-  {
-    title: 'Integrations & APIs',
-    color: '#00C8FF',
-    icon: '🔗',
-    skills: [
-      { name: 'REST APIs', level: 93 },
-      { name: 'Webhooks', level: 92 },
-      { name: 'OAuth / JWT', level: 85 },
-      // { name: 'GraphQL', level: 75 },
-      // { name: 'Zapier', level: 80 },
+      { name: 'n8n Workflows', level: 92 },
+      { name: 'OpenAI API', level: 88 },
+      { name: 'AI Agents', level: 85 },
+      { name: 'Webhook Automation', level: 90 },
     ]
   },
   {
@@ -31,11 +18,9 @@ const skillCategories = [
     color: '#61DAFB',
     icon: '⚛️',
     skills: [
-      { name: 'React', level: 88 },
-      // { name: 'Tailwind CSS', level: 90 },
-      { name: 'JavaScript', level: 87 },
-      { name: 'Vite', level: 82 },
-      { name: 'TypeScript', level: 72 },
+      { name: 'React JS', level: 88 },
+      { name: 'HTML / CSS / JS', level: 90 },
+      { name: 'Figma / Canva', level: 78 },
     ]
   },
   {
@@ -44,10 +29,20 @@ const skillCategories = [
     icon: '⚙️',
     skills: [
       { name: 'Node.js', level: 85 },
-      { name: 'Express.js', level: 82 },
-      { name: 'MongoDB', level: 80 },
-      { name: 'PostgreSQL', level: 75 },
-      { name: 'Firebase', level: 78 },
+      { name: 'Laravel (PHP)', level: 80 },
+      { name: 'Python', level: 75 },
+      { name: 'Java', level: 70 },
+      { name: 'REST APIs', level: 88 },
+    ]
+  },
+  {
+    title: 'Database',
+    color: '#F59E0B',
+    icon: '🗄️',
+    skills: [
+      { name: 'MongoDB', level: 82 },
+      { name: 'MySQL', level: 80 },
+      { name: 'Firebase', level: 72 },
     ]
   },
   {
@@ -55,11 +50,9 @@ const skillCategories = [
     color: '#A78BFA',
     icon: '🛠️',
     skills: [
-      { name: 'Git / GitHub', level: 92 },
-      // { name: 'Docker', level: 72 },
-      // { name: 'Linux / CLI', level: 85 },
-      { name: 'Postman', level: 90 },
+      { name: 'Git / GitHub', level: 90 },
       { name: 'VS Code', level: 95 },
+      { name: 'Postman', level: 85 },
     ]
   },
 ]
@@ -94,7 +87,6 @@ export default function Skills({ darkMode }) {
   return (
     <section id="skills" className={`section-padding ${darkMode ? 'bg-dark-800/30' : 'bg-slate-100/50'}`}>
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -111,11 +103,10 @@ export default function Skills({ darkMode }) {
             Technical Expertise
           </h2>
           <p className={`mt-4 text-base max-w-xl mx-auto font-body ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-            Specialized in AI automation and workflow engineering with a full-stack foundation
+            Full-stack foundation with a specialisation in AI automation and workflow engineering
           </p>
         </motion.div>
 
-        {/* Cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((cat, i) => (
             <motion.div
@@ -125,35 +116,25 @@ export default function Skills({ darkMode }) {
               transition={{ duration: 0.6, delay: i * 0.1 }}
               className={`tech-card ${darkMode ? '' : 'bg-white border-slate-200 hover:border-primary-300'}`}
             >
-              {/* Card top accent */}
               <div className="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl" style={{ background: `linear-gradient(90deg, ${cat.color}50, ${cat.color}, ${cat.color}50)` }} />
-
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-2xl">{cat.icon}</span>
                 <h3 className={`font-display font-bold text-base ${darkMode ? 'text-white' : 'text-slate-900'}`}>{cat.title}</h3>
               </div>
-
               <div className={darkMode ? 'text-slate-300' : 'text-slate-700'}>
                 {cat.skills.map((skill, j) => (
-                  <SkillBar
-                    key={skill.name}
-                    name={skill.name}
-                    level={skill.level}
-                    color={cat.color}
-                    delay={i * 0.05 + j * 0.07}
-                  />
+                  <SkillBar key={skill.name} name={skill.name} level={skill.level} color={cat.color} delay={i * 0.05 + j * 0.07} />
                 ))}
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Marquee tech strip */}
         <div className="mt-16 overflow-hidden">
           <div className={`border-y py-4 ${darkMode ? 'border-white/5' : 'border-slate-200'}`}>
             <div className="flex animate-marquee gap-8 whitespace-nowrap">
               {[...Array(2)].map((_, repeat) =>
-                ['n8n', 'OpenAI', 'React', 'Node.js', 'REST API', 'AI Agents', 'Webhook', 'MongoDB', 'Firebase', 'Git', 'TypeScript'].map(tech => (
+                ['n8n', 'OpenAI', 'React', 'Node.js', 'Laravel', 'PHP', 'Python', 'MongoDB', 'MySQL', 'Git', 'Figma', 'REST API', 'Canva'].map(tech => (
                   <span key={`${tech}-${repeat}`} className={`inline-flex items-center gap-2 text-sm font-mono ${darkMode ? 'text-slate-500' : 'text-slate-400'}`}>
                     <span className="w-1.5 h-1.5 rounded-full bg-[#00FFB2] opacity-60" />
                     {tech}

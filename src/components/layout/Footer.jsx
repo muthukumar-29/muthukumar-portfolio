@@ -26,7 +26,7 @@ export default function Footer({ darkMode }) {
           {[
             { icon: Github, href: 'https://github.com/muthukumar-29', label: 'GitHub' },
             { icon: Linkedin, href: 'https://linkedin.com/in/muthukumar', label: 'LinkedIn' },
-            { icon: Mail, href: 'mailto:muthukumarm.2903@gmail.com', label: 'Email' },
+            { icon: Mail, href: 'mailto:contact@muthukumar.dev', label: 'Email' },
           ].map(({ icon: Icon, href, label }) => (
             <a
               key={label}

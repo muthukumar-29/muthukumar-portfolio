@@ -4,74 +4,58 @@ import { Github, ExternalLink, ArrowRight } from 'lucide-react'
 
 const projects = [
   {
-    title: 'AI Press Meet Assistant',
-    description: 'Automated press conference Q&A system powered by GPT-4. Ingests press releases, generates intelligent responses, and handles multi-turn conversation flows via webhook triggers.',
-    tech: ['n8n', 'OpenAI GPT-4', 'Node.js', 'Webhooks', 'REST API'],
+    title: 'Healthy Farm',
+    description: 'A mobile application that creates a direct connection between farmers and customers, eliminating intermediaries. Built with Android and Kotlin for a smooth, native experience.',
+    tech: ['Android', 'Kotlin', 'Mobile'],
+    category: 'Mobile App',
+    color: '#68A063',
+    github: 'https://github.com/muthukumar-29/HealthyFarm',
+    demo: 'https://github.com/muthukumar-29/HealthyFarm',
+    icon: '🌾',
+  },
+  {
+    title: 'Frisch Für Sie — German Bakery',
+    description: 'E-commerce application for a German bakery shop built with the MEAN stack. Contributed extensively on the frontend — product listings, cart, and checkout flows.',
+    tech: ['MEAN Stack', 'Angular', 'Node.js', 'MongoDB'],
+    category: 'Full Stack',
+    color: '#F59E0B',
+    github: '#',
+    demo: 'https://frischfuersie.de/',
+    icon: '🥐',
+  },
+  {
+    title: 'E-Commerce Admin Panel',
+    description: 'A comprehensive MERN stack admin dashboard covering users, products, orders, and real-time analytics. Includes full authentication and role-based access control.',
+    tech: ['MERN Stack', 'React', 'Node.js', 'MongoDB'],
+    category: 'Full Stack',
+    color: '#00C8FF',
+    github: 'https://github.com/muthukumar-29/ecommerce-admin',
+    demo: 'https://github.com/muthukumar-29/ecommerce-admin',
+    icon: '🛒',
+  },
+  {
+    title: 'AI Messenger Automation Bot',
+    description: 'Facebook Messenger bot with NLP-powered intent detection, automated response flows, real-time session management via Google Sheets, and n8n as the orchestration backbone.',
+    tech: ['Facebook API', 'n8n', 'Node.js', 'OpenAI', 'Google Sheets'],
     category: 'AI Automation',
     color: '#00FFB2',
     github: 'https://github.com/muthukumar-29',
     demo: '#',
-    featured: true,
-    icon: '🎤',
-  },
-  {
-    title: 'CRM Automation System',
-    description: 'End-to-end CRM pipeline with automated lead scoring, follow-up sequences, and real-time data sync across HubSpot, Notion, and custom dashboards.',
-    tech: ['n8n', 'HubSpot API', 'React', 'MongoDB', 'Node.js'],
-    category: 'Workflow Automation',
-    color: '#00C8FF',
-    github: 'https://github.com/muthukumar-29',
-    demo: '#',
-    featured: true,
-    icon: '📊',
-  },
-  {
-    title: 'AI Chat Automation',
-    description: 'Intelligent customer support chatbot with context memory, sentiment analysis, and auto-escalation. Integrated with WhatsApp and Slack via custom middleware.',
-    tech: ['OpenAI', 'n8n', 'WhatsApp API', 'Redis', 'Express'],
-    category: 'AI Automation',
-    color: '#A78BFA',
-    github: 'https://github.com/muthukumar-29',
-    demo: '#',
-    featured: false,
-    icon: '💬',
-  },
-  {
-    title: 'Messenger Automation Bot',
-    description: 'Facebook Messenger bot with NLP-powered intent detection, automated response flows, and real-time analytics dashboard for business messaging at scale.',
-    tech: ['Facebook API', 'n8n', 'Node.js', 'React', 'MongoDB'],
-    category: 'Integration',
-    color: '#F59E0B',
-    github: 'https://github.com/muthukumar-29',
-    demo: '#',
-    featured: false,
     icon: '🤖',
   },
-  {
-    title: 'Multi-Agent Research Pipeline',
-    description: 'Orchestrated AI agent network that autonomously researches topics, synthesizes information from multiple sources, and generates structured reports with citations.',
-    tech: ['LangChain', 'OpenAI', 'Python', 'FastAPI', 'n8n'],
-    category: 'AI Agents',
-    color: '#EC4899',
-    github: 'https://github.com/muthukumar-29',
-    demo: '#',
-    featured: false,
-    icon: '🧠',
-  },
-  {
-    title: 'API Integration Hub',
-    description: 'Centralized middleware for connecting 20+ third-party services with intelligent error handling, retry logic, rate limiting, and real-time monitoring dashboard.',
-    tech: ['Node.js', 'Express', 'Redis', 'Docker', 'React'],
-    category: 'Backend',
-    color: '#68A063',
-    github: 'https://github.com/muthukumar-29',
-    demo: '#',
-    featured: false,
-    icon: '🔗',
-  },
+  // {
+  //   title: 'CRM Automation System',
+  //   description: 'End-to-end CRM pipeline with automated lead scoring, follow-up sequences, and real-time data sync. Built with n8n workflows connected to external APIs and dashboards.',
+  //   tech: ['n8n', 'REST APIs', 'React', 'MongoDB', 'Node.js'],
+  //   category: 'AI Automation',
+  //   color: '#EC4899',
+  //   github: 'https://github.com/muthukumar-29',
+  //   demo: '#',
+  //   icon: '📊',
+  // },
 ]
 
-const categories = ['All', 'AI Automation', 'Workflow Automation', 'AI Agents', 'Integration', 'Backend']
+const categories = ['All', 'AI Automation', 'Full Stack', 'Mobile App']
 
 export default function Projects({ darkMode }) {
   const ref = useRef(null)
@@ -82,7 +66,6 @@ export default function Projects({ darkMode }) {
 
   return (
     <section id="projects" className="section-padding max-w-7xl mx-auto">
-      {/* Header */}
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 30 }}
@@ -99,7 +82,7 @@ export default function Projects({ darkMode }) {
           Featured Work
         </h2>
         <p className={`mt-4 text-base max-w-xl mx-auto font-body ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-          Automation systems, AI agents, and integrations built for real-world impact
+          From mobile apps and full-stack platforms to AI automation systems
         </p>
       </motion.div>
 
@@ -127,7 +110,6 @@ export default function Projects({ darkMode }) {
         ))}
       </motion.div>
 
-      {/* Projects Grid */}
       <AnimatePresence mode="popLayout">
         <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" layout>
           {filtered.map((project, i) => (
@@ -140,44 +122,31 @@ export default function Projects({ darkMode }) {
               transition={{ duration: 0.4, delay: i * 0.06 }}
               className={`project-card group ${darkMode ? '' : 'bg-white border-slate-200'}`}
             >
-              {/* Card header */}
               <div className="p-6 pb-4">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
-                      style={{ background: `${project.color}18` }}
-                    >
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ background: `${project.color}18` }}>
                       {project.icon}
                     </div>
-                    <div>
-                      <span
-                        className="text-xs font-mono px-2 py-0.5 rounded-full"
-                        style={{ background: `${project.color}18`, color: project.color }}
-                      >
-                        {project.category}
-                      </span>
-                    </div>
+                    <span className="text-xs font-mono px-2 py-0.5 rounded-full" style={{ background: `${project.color}18`, color: project.color }}>
+                      {project.category}
+                    </span>
                   </div>
                   <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`p-1.5 rounded-lg transition-colors ${darkMode ? 'text-slate-500 hover:text-white' : 'text-slate-400 hover:text-slate-900'}`}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Github size={15} />
-                    </a>
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-1.5 rounded-lg text-[#00FFB2] hover:text-white transition-colors"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <ExternalLink size={15} />
-                    </a>
+                    {project.github !== '#' && (
+                      <a href={project.github} target="_blank" rel="noopener noreferrer"
+                        className={`p-1.5 rounded-lg transition-colors ${darkMode ? 'text-slate-500 hover:text-white' : 'text-slate-400 hover:text-slate-900'}`}
+                        onClick={e => e.stopPropagation()}>
+                        <Github size={15} />
+                      </a>
+                    )}
+                    {project.demo !== '#' && (
+                      <a href={project.demo} target="_blank" rel="noopener noreferrer"
+                        className="p-1.5 rounded-lg text-[#00FFB2] hover:text-white transition-colors"
+                        onClick={e => e.stopPropagation()}>
+                        <ExternalLink size={15} />
+                      </a>
+                    )}
                   </div>
                 </div>
 
@@ -189,43 +158,30 @@ export default function Projects({ darkMode }) {
                 </p>
               </div>
 
-              {/* Tech stack */}
               <div className={`px-6 pb-6 border-t ${darkMode ? 'border-white/5' : 'border-slate-100'} pt-4`}>
                 <div className="flex flex-wrap gap-1.5">
                   {project.tech.map(t => (
-                    <span
-                      key={t}
-                      className={`text-xs font-mono px-2 py-1 rounded-lg ${darkMode ? 'bg-dark-700 text-slate-500' : 'bg-slate-100 text-slate-500'}`}
-                    >
+                    <span key={t} className={`text-xs font-mono px-2 py-1 rounded-lg ${darkMode ? 'bg-dark-700 text-slate-500' : 'bg-slate-100 text-slate-500'}`}>
                       {t}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Hover bottom line */}
-              <div
-                className="absolute bottom-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: `linear-gradient(90deg, transparent, ${project.color}, transparent)` }}
-              />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{ background: `linear-gradient(90deg, transparent, ${project.color}, transparent)` }} />
             </motion.article>
           ))}
         </motion.div>
       </AnimatePresence>
 
-      {/* CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.5 }}
         className="text-center mt-12"
       >
-        <a
-          href="https://github.com/muthukumar-29"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-outline inline-flex group"
-        >
+        <a href="https://github.com/muthukumar-29" target="_blank" rel="noopener noreferrer" className="btn-outline inline-flex group">
           <Github size={16} />
           View All on GitHub
           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
