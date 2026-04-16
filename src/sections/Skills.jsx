@@ -6,77 +6,53 @@ const skillCategories = [
     title: 'AI & Automation',
     color: '#00FFB2',
     icon: '🤖',
-    skills: [
-      { name: 'n8n Workflows', level: 92 },
-      { name: 'OpenAI API', level: 88 },
-      { name: 'AI Agents', level: 85 },
-      { name: 'Webhook Automation', level: 90 },
-    ]
+    skills: ['n8n Workflows', 'OpenAI API', 'AI Agents', 'LLM Pipelines', 'Prompt Engineering'],
   },
   {
     title: 'Frontend',
     color: '#61DAFB',
     icon: '⚛️',
-    skills: [
-      { name: 'React JS', level: 88 },
-      { name: 'HTML / CSS / JS', level: 90 },
-      { name: 'Figma / Canva', level: 78 },
-    ]
+    skills: ['React JS', 'Angular', 'HTML / CSS / JS', 'Tailwind CSS', 'Framer Motion'],
   },
   {
     title: 'Backend',
     color: '#68A063',
     icon: '⚙️',
-    skills: [
-      { name: 'Node.js', level: 85 },
-      { name: 'Laravel (PHP)', level: 80 },
-      { name: 'Python', level: 75 },
-      { name: 'Java', level: 70 },
-      { name: 'REST APIs', level: 88 },
-    ]
+    skills: ['Express.js', 'PHP', 'Python', 'Java', 'REST APIs'],
   },
   {
     title: 'Database',
     color: '#F59E0B',
     icon: '🗄️',
-    skills: [
-      { name: 'MongoDB', level: 82 },
-      { name: 'MySQL', level: 80 },
-      { name: 'Firebase', level: 72 },
-    ]
+    skills: ['MongoDB', 'MySQL', 'Firebase'],
   },
   {
     title: 'Tools & DevOps',
     color: '#A78BFA',
     icon: '🛠️',
-    skills: [
-      { name: 'Git / GitHub', level: 90 },
-      { name: 'VS Code', level: 95 },
-      { name: 'Postman', level: 85 },
-    ]
+    skills: ['Git / GitHub', 'VS Code', 'Postman', 'Docker'],
   },
 ]
 
-function SkillBar({ name, level, color, delay }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true })
-
+function SkillChip({ name, color, delay }) {
   return (
-    <div ref={ref} className="mb-4">
-      <div className="flex justify-between items-center mb-1.5">
-        <span className="text-sm font-mono font-medium">{name}</span>
-        <span className="text-xs font-mono opacity-60">{level}%</span>
-      </div>
-      <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${level}%` } : { width: 0 }}
-          transition={{ duration: 1.2, delay: delay + 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="h-full rounded-full"
-          style={{ background: `linear-gradient(90deg, ${color}90, ${color})` }}
-        />
-      </div>
-    </div>
+    <motion.span
+      initial={{ opacity: 0, scale: 0.85 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4, delay }}
+      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-300 hover:scale-105 cursor-default"
+      style={{
+        background: `${color}14`,
+        color: color,
+        border: `1px solid ${color}30`,
+      }}
+    >
+      <span
+        className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+        style={{ background: color, boxShadow: `0 0 6px ${color}` }}
+      />
+      {name}
+    </motion.span>
   )
 }
 
@@ -114,16 +90,30 @@ export default function Skills({ darkMode }) {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className={`tech-card ${darkMode ? '' : 'bg-white border-slate-200 hover:border-primary-300'}`}
+              className={`tech-card ${darkMode ? 'bg-dark-800/50' : 'bg-white border-slate-200 hover:border-primary-300 hover:shadow-xl'}`}
             >
               <div className="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl" style={{ background: `linear-gradient(90deg, ${cat.color}50, ${cat.color}, ${cat.color}50)` }} />
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-2xl">{cat.icon}</span>
-                <h3 className={`font-display font-bold text-base ${darkMode ? 'text-white' : 'text-slate-900'}`}>{cat.title}</h3>
+
+              <div className="flex items-center gap-3 mb-5">
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
+                  style={{ background: `${cat.color}15` }}
+                >
+                  {cat.icon}
+                </div>
+                <h3 className={`font-display font-bold text-base ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+                  {cat.title}
+                </h3>
               </div>
-              <div className={darkMode ? 'text-slate-300' : 'text-slate-700'}>
+
+              <div className="flex flex-wrap gap-2">
                 {cat.skills.map((skill, j) => (
-                  <SkillBar key={skill.name} name={skill.name} level={skill.level} color={cat.color} delay={i * 0.05 + j * 0.07} />
+                  <SkillChip
+                    key={skill}
+                    name={skill}
+                    color={cat.color}
+                    delay={inView ? i * 0.05 + j * 0.06 : 0}
+                  />
                 ))}
               </div>
             </motion.div>
@@ -134,7 +124,7 @@ export default function Skills({ darkMode }) {
           <div className={`border-y py-4 ${darkMode ? 'border-white/5' : 'border-slate-200'}`}>
             <div className="flex animate-marquee gap-8 whitespace-nowrap">
               {[...Array(2)].map((_, repeat) =>
-                ['n8n', 'OpenAI', 'React', 'Node.js', 'Laravel', 'PHP', 'Python', 'MongoDB', 'MySQL', 'Git', 'Figma', 'REST API', 'Canva'].map(tech => (
+                ['n8n', 'OpenAI', 'React', 'Express.js', 'PHP', 'Python', 'MongoDB', 'MySQL', 'Git', 'REST API', 'AI Agents'].map(tech => (
                   <span key={`${tech}-${repeat}`} className={`inline-flex items-center gap-2 text-sm font-mono ${darkMode ? 'text-slate-500' : 'text-slate-400'}`}>
                     <span className="w-1.5 h-1.5 rounded-full bg-[#00FFB2] opacity-60" />
                     {tech}

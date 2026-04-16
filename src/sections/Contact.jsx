@@ -2,16 +2,14 @@ import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Mail, Github, Linkedin, Send, MapPin, Clock, CheckCircle, AlertCircle, X } from 'lucide-react'
 
-// 🔧 Replace with your actual n8n webhook URL
-const N8N_WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL
+const CONTACT_API = import.meta.env.VITE_CONTACT_API_URL || 'http://localhost:3001/api/contact'
 
 const contactLinks = [
   { icon: Mail, label: 'Email', value: 'muthukumarm.2903@gmail.com', href: 'mailto:muthukumarm.2903@gmail.com', color: '#00FFB2' },
   { icon: Github, label: 'GitHub', value: 'github.com/muthukumar-29', href: 'https://github.com/muthukumar-29', color: '#A78BFA' },
-  { icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/muthukumar', href: 'https://linkedin.com/in/muthukumar', color: '#0EA5E9' },
+  { icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/muthukumar29', href: 'https://www.linkedin.com/in/muthukumar29', color: '#0EA5E9' },
 ]
 
-// Custom validation — no browser HTML popups
 function validate(form) {
   const errors = {}
   if (!form.name.trim()) errors.name = 'Name is required'
@@ -20,13 +18,15 @@ function validate(form) {
   if (!form.email.trim()) errors.email = 'Email is required'
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errors.email = 'Enter a valid email address'
 
+  if (!form.subject.trim()) errors.subject = 'Subject is required'
+
   if (!form.message.trim()) errors.message = 'Message is required'
   else if (form.message.trim().length < 10) errors.message = 'Message must be at least 10 characters'
 
   return errors
 }
 
-function FieldError({ msg, darkMode }) {
+function FieldError({ msg }) {
   return (
     <AnimatePresence>
       {msg && (
@@ -49,7 +49,7 @@ export default function Contact({ darkMode }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState({})
   const [status, setStatus] = useState('idle') // idle | loading | success | error
@@ -57,7 +57,6 @@ export default function Contact({ darkMode }) {
 
   const handleChange = (field, value) => {
     setForm(f => ({ ...f, [field]: value }))
-    // Clear error live as user types
     if (touched[field]) {
       const newErrors = validate({ ...form, [field]: value })
       setErrors(e => ({ ...e, [field]: newErrors[field] }))
@@ -72,9 +71,7 @@ export default function Contact({ darkMode }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    // Validate all fields
-    const allTouched = { name: true, email: true, message: true }
+    const allTouched = { name: true, email: true, subject: true, message: true }
     setTouched(allTouched)
     const newErrors = validate(form)
     setErrors(newErrors)
@@ -84,27 +81,27 @@ export default function Contact({ darkMode }) {
     setErrorMsg('')
 
     try {
-      const res = await fetch(N8N_WEBHOOK_URL, {
+      const res = await fetch(CONTACT_API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: form.name.trim(),
           email: form.email.trim(),
+          subject: form.subject.trim(),
           message: form.message.trim(),
-          timestamp: new Date().toISOString(),
-          source: 'portfolio-contact-form',
         }),
       })
 
-      if (!res.ok) throw new Error(`Server error: ${res.status}`)
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || `Server error: ${res.status}`)
 
       setStatus('success')
-      setForm({ name: '', email: '', message: '' })
+      setForm({ name: '', email: '', subject: '', message: '' })
       setTouched({})
       setErrors({})
     } catch (err) {
       setStatus('error')
-      setErrorMsg('Something went wrong. Please try emailing me directly.')
+      setErrorMsg(err.message || 'Something went wrong. Please email me directly.')
     }
   }
 
@@ -206,7 +203,7 @@ export default function Contact({ darkMode }) {
           >
             <AnimatePresence mode="wait">
 
-              {/* ✅ Success state */}
+              {/* Success state */}
               {status === 'success' && (
                 <motion.div
                   key="success"
@@ -235,10 +232,10 @@ export default function Contact({ darkMode }) {
 
                   <div>
                     <h3 className={`font-display font-bold text-2xl mb-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                      Message Received!
+                      Message Sent!
                     </h3>
                     <p className={`text-sm max-w-xs mx-auto leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                      Thanks for reaching out. I'll get back to you within 24 hours.
+                      Thanks for reaching out. Check your inbox — a confirmation email is on its way. I'll reply within 24 hours.
                     </p>
                   </div>
 
@@ -250,7 +247,7 @@ export default function Contact({ darkMode }) {
                       animate={{ opacity: [1, 0.3, 1] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
                     />
-                    Delivered via n8n automation
+                    Delivered via Nodemailer
                   </div>
 
                   <button
@@ -262,7 +259,7 @@ export default function Contact({ darkMode }) {
                 </motion.div>
               )}
 
-              {/* 📝 Form state */}
+              {/* Form state */}
               {status !== 'success' && (
                 <motion.div
                   key="form"
@@ -292,9 +289,7 @@ export default function Contact({ darkMode }) {
                   <div className="space-y-5">
                     {/* Name */}
                     <div>
-                      <label className={`block text-xs font-mono mb-2 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                        Name
-                      </label>
+                      <label className={`block text-xs font-mono mb-2 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Name</label>
                       <input
                         type="text"
                         value={form.name}
@@ -303,14 +298,12 @@ export default function Contact({ darkMode }) {
                         placeholder="Your name"
                         className={inputClass('name')}
                       />
-                      <FieldError msg={touched.name && errors.name} darkMode={darkMode} />
+                      <FieldError msg={touched.name && errors.name} />
                     </div>
 
                     {/* Email */}
                     <div>
-                      <label className={`block text-xs font-mono mb-2 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                        Email
-                      </label>
+                      <label className={`block text-xs font-mono mb-2 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Email</label>
                       <input
                         type="text"
                         value={form.email}
@@ -319,14 +312,26 @@ export default function Contact({ darkMode }) {
                         placeholder="your@email.com"
                         className={inputClass('email')}
                       />
-                      <FieldError msg={touched.email && errors.email} darkMode={darkMode} />
+                      <FieldError msg={touched.email && errors.email} />
+                    </div>
+
+                    {/* Subject */}
+                    <div>
+                      <label className={`block text-xs font-mono mb-2 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Subject</label>
+                      <input
+                        type="text"
+                        value={form.subject}
+                        onChange={e => handleChange('subject', e.target.value)}
+                        onBlur={() => handleBlur('subject')}
+                        placeholder="What's this about?"
+                        className={inputClass('subject')}
+                      />
+                      <FieldError msg={touched.subject && errors.subject} />
                     </div>
 
                     {/* Message */}
                     <div>
-                      <label className={`block text-xs font-mono mb-2 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                        Message
-                      </label>
+                      <label className={`block text-xs font-mono mb-2 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Message</label>
                       <textarea
                         rows={5}
                         value={form.message}
@@ -335,7 +340,7 @@ export default function Contact({ darkMode }) {
                         placeholder="Tell me about your project or automation challenge..."
                         className={`${inputClass('message')} resize-none`}
                       />
-                      <FieldError msg={touched.message && errors.message} darkMode={darkMode} />
+                      <FieldError msg={touched.message && errors.message} />
                     </div>
 
                     {/* Submit */}
@@ -351,7 +356,7 @@ export default function Contact({ darkMode }) {
                             animate={{ rotate: 360 }}
                             transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
                           />
-                          Sending via n8n...
+                          Sending...
                         </span>
                       ) : (
                         <>

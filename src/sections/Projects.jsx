@@ -43,6 +43,16 @@ const projects = [
     demo: '#',
     icon: '🤖',
   },
+  {
+    title: 'Office CRM',
+    description: 'A multi-platform CRM system comprising an Android mobile app (Kotlin), a Java Spring Boot AI backend, and a React + Vite admin dashboard. Manages leads, contacts, and internal workflows with Docker-ready deployment.',
+    tech: ['React', 'Vite', 'Java', 'Spring Boot', 'Kotlin', 'Android', 'Docker'],
+    category: 'Full Stack',
+    color: '#EC4899',
+    github: 'https://github.com/muthukumar-29/office-crm',
+    demo: '#',
+    icon: '📊',
+  },
   // {
   //   title: 'CRM Automation System',
   //   description: 'End-to-end CRM pipeline with automated lead scoring, follow-up sequences, and real-time data sync. Built with n8n workflows connected to external APIs and dashboards.',
@@ -120,7 +130,7 @@ export default function Projects({ darkMode }) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              className={`project-card group ${darkMode ? '' : 'bg-white border-slate-200'}`}
+              className={`project-card group ${darkMode ? 'project-card-dark border-white/5' : 'bg-white border-slate-200 hover:border-primary-300 hover:shadow-xl'}`}
             >
               <div className="p-6 pb-4">
                 <div className="flex items-start justify-between mb-4">

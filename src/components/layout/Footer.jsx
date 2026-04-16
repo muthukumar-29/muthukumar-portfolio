@@ -16,7 +16,7 @@ export default function Footer({ darkMode }) {
         </div>
 
         <p className={`text-sm font-body ${darkMode ? 'text-slate-500' : 'text-slate-500'}`}>
-          © {year} Muthukumar · AI Automation Engineer at{' '}
+          © {year} Muthukumar · AI Automation Developer at{' '}
           <a href="https://automaitee.com" target="_blank" rel="noopener noreferrer" className="text-[#00FFB2] hover:underline">
             Automaitee
           </a>
@@ -25,7 +25,7 @@ export default function Footer({ darkMode }) {
         <div className="flex items-center gap-4">
           {[
             { icon: Github, href: 'https://github.com/muthukumar-29', label: 'GitHub' },
-            { icon: Linkedin, href: 'https://linkedin.com/in/muthukumar', label: 'LinkedIn' },
+            { icon: Linkedin, href: 'https://www.linkedin.com/in/muthukumar29', label: 'LinkedIn' },
             { icon: Mail, href: 'mailto:contact@muthukumar.dev', label: 'Email' },
           ].map(({ icon: Icon, href, label }) => (
             <a

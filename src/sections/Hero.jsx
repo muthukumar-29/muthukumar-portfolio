@@ -239,7 +239,7 @@ export default function Hero({ darkMode }) {
               : 'border-primary-300 bg-primary-50 text-primary-700'
           }`}>
             <Sparkles size={12} />
-            <span>Full Stack Dev · AI Automation · Automaitee</span>
+            <span>Full Stack Dev · AI Automation Developer · Automaitee</span>
             <motion.span
               className="inline-block w-2 h-2 rounded-full bg-[#00FFB2]"
               animate={{ opacity: [1, 0.3, 1] }}
@@ -260,8 +260,8 @@ export default function Hero({ darkMode }) {
         {/* Role & description */}
         <motion.div variants={itemVariants}>
           <p className={`font-body text-lg md:text-xl max-w-2xl mx-auto mt-6 leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-            Full Stack Developer & AI Automation Engineer. Building intelligent workflows,
-            workflows, and integrations that transform how businesses operate — from idea to{' '}
+            Full Stack Developer & AI Automation Developer. Building intelligent workflows,
+            agents, and integrations that transform how businesses operate — from idea to{' '}
             <span className={darkMode ? 'text-[#00FFB2]' : 'text-primary-600'}>production</span>.
           </p>
         </motion.div>

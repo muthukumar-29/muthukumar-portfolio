@@ -41,7 +41,7 @@ export default function About({ darkMode }) {
               </div>
               <div>
                 <div className={`font-display font-bold text-xl ${darkMode ? 'text-white' : 'text-slate-900'}`}>Muthukumar M</div>
-                <div className="text-[#00FFB2] text-sm font-mono">AI Automation Engineer</div>
+                <div className="text-[#00FFB2] text-sm font-mono">AI Automation Developer</div>
                 <div className={`text-xs mt-1 font-mono ${darkMode ? 'text-slate-500' : 'text-slate-500'}`}>Rajapalayam, India · Remote-friendly</div>
               </div>
             </div>
@@ -105,17 +105,17 @@ export default function About({ darkMode }) {
 
           <h2 className={`font-display font-extrabold text-4xl md:text-5xl leading-tight mb-6 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
             Developer. Builder.<br />
-            <span className="gradient-accent">Automation Engineer.</span>
+            <span className="gradient-accent">Automation Developer.</span>
           </h2>
 
           <div className={`space-y-4 text-base leading-relaxed font-body ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
             <p>
               I'm <strong className={darkMode ? 'text-slate-200' : 'text-slate-800'}>Muthukumar M</strong>, a Full Stack Developer and AI Automation
-              Engineer from Rajapalayam, India. I hold a B.Sc in Computer Science and am currently
-              pursuing my MCA at Ayya Nadar Janaki Ammal College, Sivakasi.
+              Developer from Rajapalayam, India. I hold a B.Sc in Computer Science and have completed
+              my MCA at Ayya Nadar Janaki Ammal College, Sivakasi.
             </p>
             <p>
-              I work as an AI Automation Engineer at{' '}
+              I work as an AI Automation Developer at{' '}
               <a href="https://automaitee.com" target="_blank" rel="noopener noreferrer"
                 className={`font-medium hover:underline ${darkMode ? 'text-[#00FFB2]' : 'text-primary-600'}`}>
                 Automaitee
@@ -134,7 +134,7 @@ export default function About({ darkMode }) {
 
           {/* Tag cloud */}
           <div className="flex flex-wrap gap-2 mt-8">
-            {['n8n', 'React', 'Node.js', 'OpenAI', 'Laravel', 'PHP', 'MongoDB', 'MySQL', 'Python', 'Git', 'Figma'].map(tag => (
+            {['n8n', 'React', 'Express.js', 'OpenAI', 'PHP', 'MongoDB', 'MySQL', 'Python', 'Git', 'REST API'].map(tag => (
               <span
                 key={tag}
                 className={`px-3 py-1.5 rounded-lg text-xs font-mono ${darkMode ? 'bg-dark-700 border border-white/10 text-slate-400' : 'bg-slate-100 border border-slate-200 text-slate-600'}`}

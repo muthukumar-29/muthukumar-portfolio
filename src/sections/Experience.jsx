@@ -5,7 +5,7 @@ import { Briefcase, GraduationCap, MapPin, Calendar } from 'lucide-react'
 const experience = [
   {
     type: 'work',
-    role: 'AI Automation Engineer',
+    role: 'AI Automation Developer',
     org: 'Automaitee Digital',
     orgUrl: 'https://automaitee.com',
     period: 'December 2025 – Present',
@@ -40,9 +40,9 @@ const education = [
   {
     degree: 'MCA — Master of Computer Applications',
     institution: 'Ayya Nadar Janaki Ammal College',
-    period: '2024 – Pursuing',
+    period: '2024 – 2026',
     location: 'Sivakasi, India',
-    grade: 'CGPA: 8.6 (Upto II Semester)',
+    grade: 'CGPA: 8.6',
     color: '#A78BFA',
   },
   {
