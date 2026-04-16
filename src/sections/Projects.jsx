@@ -46,7 +46,7 @@ const projects = [
   {
     title: 'Office CRM',
     description: 'A multi-platform CRM system comprising an Android mobile app (Kotlin), a Java Spring Boot AI backend, and a React + Vite admin dashboard. Manages leads, contacts, and internal workflows with Docker-ready deployment.',
-    tech: ['React', 'Vite', 'Java', 'Spring Boot', 'Kotlin', 'Android', 'Docker'],
+    tech: ['React', 'Vite', 'Java', 'Spring Boot', 'Kotlin', 'Android'],
     category: 'Full Stack',
     color: '#EC4899',
     github: 'https://github.com/muthukumar-29/office-crm',
