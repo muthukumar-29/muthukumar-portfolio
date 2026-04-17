@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Mail, Github, Linkedin, Send, MapPin, Clock, CheckCircle, AlertCircle, X } from 'lucide-react'
 
-const CONTACT_API = import.meta.env.VITE_CONTACT_API_URL || 'http://localhost:3001/api/contact'
+const CONTACT_API = import.meta.env.VITE_CONTACT_API_URL || '/api/contact'
 
 const contactLinks = [
   { icon: Mail, label: 'Email', value: 'muthukumarm.2903@gmail.com', href: 'mailto:muthukumarm.2903@gmail.com', color: '#00FFB2' },
