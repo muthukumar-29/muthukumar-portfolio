@@ -239,17 +239,6 @@ export default function Contact({ darkMode }) {
                     </p>
                   </div>
 
-                  <div className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono ${
-                    darkMode ? 'bg-dark-700 text-slate-500' : 'bg-slate-100 text-slate-500'
-                  }`}>
-                    <motion.span
-                      className="inline-block w-1.5 h-1.5 rounded-full bg-[#00FFB2]"
-                      animate={{ opacity: [1, 0.3, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    />
-                    Delivered via Nodemailer
-                  </div>
-
                   <button
                     onClick={() => setStatus('idle')}
                     className="btn-outline text-xs py-2 px-5 mt-2"

@@ -3,7 +3,10 @@
     "allow": [
       "Bash(gh repo *)",
       "WebFetch(domain:github.com)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "mcp__claude_ai_Vercel__list_deployments",
+      "mcp__claude_ai_Vercel__web_fetch_vercel_url",
+      "WebFetch(domain:muthukumarm.vercel.app)"
     ]
   }
 }
