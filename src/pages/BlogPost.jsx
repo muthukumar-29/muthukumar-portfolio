@@ -100,8 +100,23 @@ export default function BlogPost({ darkMode }) {
           }}
         >
           <style>{`
-            .prose h2 { font-family: 'Syne', sans-serif; font-weight: 800; }
-            .prose h3 { font-family: 'Syne', sans-serif; font-weight: 700; }
+            .prose { line-height: 1.9; }
+            .prose p { margin-bottom: 1.5em; }
+            .prose h2 {
+              font-family: 'Syne', sans-serif;
+              font-weight: 800;
+              margin-top: 2.5em;
+              margin-bottom: 0.9em;
+            }
+            .prose h3 {
+              font-family: 'Syne', sans-serif;
+              font-weight: 700;
+              margin-top: 2em;
+              margin-bottom: 0.75em;
+            }
+            .prose ul, .prose ol { margin-top: 0.75em; margin-bottom: 1.5em; }
+            .prose li { margin-bottom: 0.6em; line-height: 1.8; }
+            .prose hr { margin-top: 2.5em; margin-bottom: 2.5em; }
             .prose code:not(pre code) {
               background: rgba(0,255,178,0.1);
               color: #00FFB2;
@@ -114,6 +129,8 @@ export default function BlogPost({ darkMode }) {
               background: ${darkMode ? '#0A1510' : '#f8fafc'};
               border: 1px solid ${darkMode ? 'rgba(255,255,255,0.06)' : '#e2e8f0'};
               border-radius: 12px;
+              margin-top: 1.5em;
+              margin-bottom: 2em;
             }
             .prose a { color: #00FFB2; text-decoration: none; }
             .prose a:hover { text-decoration: underline; }
@@ -124,7 +141,9 @@ export default function BlogPost({ darkMode }) {
               border-left-color: #00FFB2;
               background: rgba(0,255,178,0.05);
               border-radius: 0 8px 8px 0;
-              padding: 16px 20px;
+              padding: 20px 24px;
+              margin-top: 1.5em;
+              margin-bottom: 1.5em;
             }
           `}</style>
           <ReactMarkdown>{post.content}</ReactMarkdown>
