@@ -1,6 +1,6 @@
 # Muthukumar — Portfolio Website
 
-A modern, animated portfolio for an AI Automation Engineer. Built with Vite + React + Tailwind CSS + Framer Motion.
+A modern, animated portfolio for an Automation Specialist at Selfera Pvt Ltd. Built with Vite + React + Tailwind CSS + Framer Motion.
 
 ## Tech Stack
 
@@ -13,13 +13,13 @@ A modern, animated portfolio for an AI Automation Engineer. Built with Vite + Re
 
 ## Features
 
-- 🤖 **Floating tech icons** — n8n, OpenAI, React, Node.js with parallax mouse effect
-- 🌙 **Dark/Light mode** — smooth theme switching
-- 📱 **Fully responsive** — mobile-first design
-- 📝 **Blog system** — markdown-powered posts with categories and search
-- ✨ **Scroll animations** — Framer Motion reveal effects
-- 🎯 **Custom cursor** — dot + follower cursor (desktop)
-- ⚡ **Contact form** — with loading state
+- **Floating tech icons** — n8n, OpenAI, React, Node.js with parallax mouse effect
+- **Dark/Light mode** — smooth theme switching
+- **Fully responsive** — mobile-first design
+- **Blog system** — markdown-powered posts with categories and search
+- **Scroll animations** — Framer Motion reveal effects
+- **Custom cursor** — dot + follower cursor (desktop)
+- **Contact form** — with loading state
 
 ## Sections
 
@@ -131,4 +131,4 @@ base: '/your-repo-name/'
 
 ---
 
-Built with ❤️ by Muthukumar | [automaitee.com](https://automaitee.com)
+Built by Muthukumar | [selfera.co.uk](https://selfera.co.uk)

@@ -1,8 +1,18 @@
 import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Github, ExternalLink, ArrowRight } from 'lucide-react'
+import { Github, ExternalLink, ArrowRight, BarChart3, Sprout, ShoppingBag, ShoppingCart, MessageSquare, Bot, Store } from 'lucide-react'
 
 const projects = [
+  {
+    title: 'Ranna Restaurant Admin Panel',
+    description: 'Built a centralized restaurant operations platform for managing staff, stores, daily assignments, financial reports, expenses, and operational analytics with secure role-based access.',
+    tech: ['Next.js', 'Tailwind CSS', 'Supabase', 'PostgreSQL'],
+    category: 'Full Stack',
+    color: '#3ECF8E',
+    github: '#',
+    demo: 'https://rannaportal.co.uk',
+    icon: Store,
+  },
   {
     title: 'Office CRM',
     description: 'A multi-platform CRM system comprising an Android mobile app (Kotlin), a Java Spring Boot AI backend, and a React + Vite admin dashboard. Manages leads, contacts, and internal workflows with Docker-ready deployment.',
@@ -11,7 +21,7 @@ const projects = [
     color: '#EC4899',
     github: 'https://github.com/muthukumar-29/office-crm',
     demo: '#',
-    icon: '📊',
+    icon: BarChart3,
   },
   {
     title: 'Healthy Farm',
@@ -21,7 +31,7 @@ const projects = [
     color: '#68A063',
     github: 'https://github.com/muthukumar-29/HealthyFarm',
     demo: 'https://github.com/muthukumar-29/HealthyFarm',
-    icon: '🌾',
+    icon: Sprout,
   },
   {
     title: 'Frisch Für Sie — German Bakery',
@@ -31,7 +41,7 @@ const projects = [
     color: '#F59E0B',
     github: '#',
     demo: 'https://frischfuersie.de/',
-    icon: '🥐',
+    icon: ShoppingBag,
   },
   {
     title: 'E-Commerce Admin Panel',
@@ -41,7 +51,7 @@ const projects = [
     color: '#00C8FF',
     github: 'https://github.com/muthukumar-29/ecommerce-admin',
     demo: 'https://github.com/muthukumar-29/ecommerce-admin',
-    icon: '🛒',
+    icon: ShoppingCart,
   },
   {
     title: 'WhatsApp Automation — Krish Homestays',
@@ -51,7 +61,7 @@ const projects = [
     color: '#25D366',
     github: '#',
     demo: 'https://wa.me/918807200931',
-    icon: '💬',
+    icon: MessageSquare,
   },
   {
     title: 'Facebook Automation — Krish Homestays',
@@ -61,7 +71,7 @@ const projects = [
     color: '#00FFB2',
     github: '#',
     demo: 'https://facebook.com/krishhomestaysmunnar',
-    icon: '🤖',
+    icon: Bot,
   },
 ]
 
@@ -121,7 +131,7 @@ export default function Projects({ darkMode }) {
       </motion.div>
 
       <AnimatePresence mode="popLayout">
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" layout>
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch" layout>
           {filtered.map((project, i) => (
             <motion.article
               key={project.title}
@@ -130,13 +140,13 @@ export default function Projects({ darkMode }) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              className={`project-card group ${darkMode ? 'project-card-dark border-white/5' : 'bg-white border-slate-200 hover:border-primary-300 hover:shadow-xl'}`}
+              className={`project-card group flex flex-col justify-between h-full ${darkMode ? 'project-card-dark border-white/5' : 'bg-white border-slate-200 hover:border-primary-300 hover:shadow-xl'}`}
             >
-              <div className="p-6 pb-4">
+              <div className="p-6 pb-4 flex-1">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ background: `${project.color}18` }}>
-                      {project.icon}
+                      <project.icon size={20} style={{ color: project.color }} />
                     </div>
                     <span className="text-xs font-mono px-2 py-0.5 rounded-full" style={{ background: `${project.color}18`, color: project.color }}>
                       {project.category}

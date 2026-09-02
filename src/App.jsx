@@ -6,6 +6,8 @@ import Home from './pages/Home'
 import BlogPage from './pages/BlogPage'
 import BlogPost from './pages/BlogPost'
 import CustomCursor from './components/ui/CustomCursor'
+import ScrollToTop from './components/ui/ScrollToTop'
+import BackToTop from './components/ui/BackToTop'
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true)
@@ -22,6 +24,7 @@ export default function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'bg-dark-900 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
         <CustomCursor darkMode={darkMode} />
         <Navbar darkMode={darkMode} toggleDarkMode={() => setDarkMode(!darkMode)} />
@@ -31,6 +34,7 @@ export default function App() {
           <Route path="/blog/:slug" element={<BlogPost darkMode={darkMode} />} />
         </Routes>
         <Footer darkMode={darkMode} />
+        <BackToTop darkMode={darkMode} />
       </div>
     </Router>
   )

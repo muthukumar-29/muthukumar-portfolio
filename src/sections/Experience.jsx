@@ -5,19 +5,13 @@ import { Briefcase, GraduationCap, MapPin, Calendar } from 'lucide-react'
 const experience = [
   {
     type: 'work',
-    role: 'AI Automation Developer',
-    org: 'Automaitee Digital',
-    orgUrl: 'https://automaitee.com',
-    period: 'December 2025 – Present',
-    location: 'Remote',
-    mode: 'Full Time',
+    role: 'Automation Specialist',
+    org: 'Selfera Pvt Ltd',
+    orgUrl: 'https://selfera.co.uk',
+    period: 'May 2026 – Present',
+    location: 'Rajapalayam, India',
+    mode: 'On-site',
     color: '#00FFB2',
-    points: [
-      'Designing and deploying AI-powered automation workflows using n8n',
-      'Building intelligent AI agents integrated with OpenAI and other LLMs',
-      'Creating webhook-driven pipelines and REST API integrations for clients',
-      'Automating business processes end-to-end — from data ingestion to delivery',
-    ],
   },
   {
     type: 'work',
@@ -27,12 +21,6 @@ const experience = [
     location: 'Rajapalayam, India',
     mode: 'Part Time',
     color: '#00C8FF',
-    points: [
-      'Built production web applications using the MERN and MEAN stack',
-      'Developed and maintained client-facing frontends with React and Angular',
-      'Designed REST APIs and backend services with Node.js and Express',
-      'Delivered e-commerce platforms, admin dashboards, and business tools',
-    ],
   },
 ]
 
@@ -54,20 +42,12 @@ const education = [
     color: '#00C8FF',
   },
   {
-    degree: 'HSC — Higher Secondary Certificate',
+    degree: 'HSC & SSLC — Schooling',
     institution: 'PACM Boys Higher Secondary School',
-    period: '2019 – 2021',
+    period: '2018 – 2021',
     location: 'Rajapalayam, India',
-    grade: 'Percentage: 86.6%',
+    grade: 'HSC: 86.6% | SSLC: 76.1%',
     color: '#00FFB2',
-  },
-  {
-    degree: 'SSLC — Secondary School Certificate',
-    institution: 'PACM Boys Higher Secondary School',
-    period: '2018 – 2019',
-    location: 'Rajapalayam, India',
-    grade: 'Percentage: 76.1%',
-    color: '#F59E0B',
   },
 ]
 
@@ -93,13 +73,14 @@ function TimelineItem({ item, index, darkMode, isLast }) {
         <div className="w-2 h-2 rounded-full" style={{ background: item.color }} />
       </div>
 
-      <div className={`mb-8 p-5 rounded-2xl border transition-all duration-300 ${
+      <div className={`mb-8 p-5 rounded-2xl border transition-all duration-300 flex flex-col justify-between min-h-[165px] ${
         darkMode
           ? 'border-white/5 bg-dark-800/50 hover:border-[rgba(0,255,178,0.15)]'
           : 'border-slate-200 bg-white hover:border-primary-200 hover:shadow-md'
       }`}>
-        <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
-          <div>
+        <div>
+          {/* Title & Organization */}
+          <div className="mb-2">
             <h3 className={`font-display font-bold text-base ${darkMode ? 'text-white' : 'text-slate-900'}`}>
               {item.role || item.degree}
             </h3>
@@ -112,38 +93,50 @@ function TimelineItem({ item, index, darkMode, isLast }) {
               <p className="text-[#00FFB2] text-sm font-mono mt-0.5">{item.org || item.institution}</p>
             )}
           </div>
-          <div className="text-right flex-shrink-0">
-            <div className={`flex items-center gap-1.5 text-xs font-mono ${darkMode ? 'text-slate-500' : 'text-slate-400'}`}>
-              <Calendar size={11} />
-              {item.period}
-            </div>
+
+          {/* Location */}
+          <div className={`flex items-center gap-1.5 text-xs font-mono mb-3 ${darkMode ? 'text-slate-500' : 'text-slate-400'}`}>
+            <MapPin size={11} />
+            {item.location}
+          </div>
+
+          {/* Points if work experience */}
+          {item.points && (
+            <ul className="space-y-1.5 mb-4">
+              {item.points.map((pt, i) => (
+                <li key={i} className={`flex items-start gap-2 text-sm font-body ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: item.color }} />
+                  {pt}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Footer row: Year & CGPA/Score/Mode at the end */}
+        <div className={`flex flex-wrap items-center justify-between gap-2 pt-3 mt-3 border-t ${
+          darkMode ? 'border-white/5' : 'border-slate-100'
+        }`}>
+          <div className={`flex items-center gap-1.5 text-xs font-mono ${darkMode ? 'text-slate-500' : 'text-slate-400'}`}>
+            <Calendar size={11} />
+            {item.period}
+          </div>
+
+          <div className="flex items-center gap-2">
             {item.mode && (
-              <span className="mt-1 inline-block text-xs font-mono px-2 py-0.5 rounded-full"
+              <span className="text-xs font-mono px-2 py-0.5 rounded-full"
                 style={{ background: `${item.color}18`, color: item.color }}>
                 {item.mode}
               </span>
             )}
             {item.grade && (
-              <div className={`mt-1 text-xs font-mono ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>{item.grade}</div>
+              <span className="text-xs font-mono px-2.5 py-1 rounded-md font-semibold"
+                style={{ background: `${item.color}15`, color: item.color }}>
+                {item.grade}
+              </span>
             )}
           </div>
         </div>
-
-        <div className={`flex items-center gap-1.5 text-xs font-mono mb-3 ${darkMode ? 'text-slate-500' : 'text-slate-400'}`}>
-          <MapPin size={11} />
-          {item.location}
-        </div>
-
-        {item.points && (
-          <ul className="space-y-1.5">
-            {item.points.map((pt, i) => (
-              <li key={i} className={`flex items-start gap-2 text-sm font-body ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: item.color }} />
-                {pt}
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
     </motion.div>
   )

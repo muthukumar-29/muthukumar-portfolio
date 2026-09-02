@@ -183,7 +183,7 @@ export default function Contact({ darkMode }) {
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={13} className={darkMode ? 'text-slate-500' : 'text-slate-400'} />
-                <span className={`text-xs ${darkMode ? 'text-slate-500' : 'text-slate-500'}`}>India (Remote-friendly)</span>
+                <span className={`text-xs ${darkMode ? 'text-slate-500' : 'text-slate-500'}`}>Rajapalayam, Tamil Nadu, India</span>
               </div>
               <div className="flex items-center gap-2 mt-1">
                 <Clock size={13} className={darkMode ? 'text-slate-500' : 'text-slate-400'} />

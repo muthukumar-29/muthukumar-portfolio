@@ -1,35 +1,36 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { Bot, Code2, Server, Database, Wrench } from 'lucide-react'
 
 const skillCategories = [
   {
     title: 'AI & Automation',
     color: '#00FFB2',
-    icon: '🤖',
+    icon: Bot,
     skills: ['n8n Workflows', 'OpenAI API', 'AI Agents', 'LLM Pipelines', 'Prompt Engineering'],
   },
   {
     title: 'Frontend',
     color: '#61DAFB',
-    icon: '⚛️',
+    icon: Code2,
     skills: ['React JS', 'Angular', 'HTML / CSS / JS', 'Tailwind CSS', 'Framer Motion'],
   },
   {
     title: 'Backend',
     color: '#68A063',
-    icon: '⚙️',
+    icon: Server,
     skills: ['Express.js', 'PHP', 'Python', 'Java', 'REST APIs'],
   },
   {
     title: 'Database',
     color: '#F59E0B',
-    icon: '🗄️',
-    skills: ['MongoDB', 'MySQL', 'Firebase'],
+    icon: Database,
+    skills: ['MongoDB', 'PostgreSQL', 'Supabase', 'MySQL', 'Firebase'],
   },
   {
     title: 'Tools & DevOps',
     color: '#A78BFA',
-    icon: '🛠️',
+    icon: Wrench,
     skills: ['Git / GitHub', 'VS Code', 'Postman', 'Docker'],
   },
 ]
@@ -83,14 +84,14 @@ export default function Skills({ darkMode }) {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {skillCategories.map((cat, i) => (
             <motion.div
               key={cat.title}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className={`tech-card ${darkMode ? 'bg-dark-800/50' : 'bg-white border-slate-200 hover:border-primary-300 hover:shadow-xl'}`}
+              className={`tech-card flex flex-col justify-between h-full ${darkMode ? 'bg-dark-800/50' : 'bg-white border-slate-200 hover:border-primary-300 hover:shadow-xl'}`}
             >
               <div className="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl" style={{ background: `linear-gradient(90deg, ${cat.color}50, ${cat.color}, ${cat.color}50)` }} />
 
@@ -99,7 +100,7 @@ export default function Skills({ darkMode }) {
                   className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
                   style={{ background: `${cat.color}15` }}
                 >
-                  {cat.icon}
+                  <cat.icon size={20} style={{ color: cat.color }} />
                 </div>
                 <h3 className={`font-display font-bold text-base ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                   {cat.title}
@@ -124,7 +125,7 @@ export default function Skills({ darkMode }) {
           <div className={`border-y py-4 ${darkMode ? 'border-white/5' : 'border-slate-200'}`}>
             <div className="flex animate-marquee gap-8 whitespace-nowrap">
               {[...Array(2)].map((_, repeat) =>
-                ['n8n', 'OpenAI', 'React', 'Express.js', 'PHP', 'Python', 'MongoDB', 'MySQL', 'Git', 'REST API', 'AI Agents'].map(tech => (
+                ['n8n', 'OpenAI', 'React', 'Express.js', 'PostgreSQL', 'Supabase', 'MongoDB', 'MySQL', 'Git', 'REST API', 'AI Agents'].map(tech => (
                   <span key={`${tech}-${repeat}`} className={`inline-flex items-center gap-2 text-sm font-mono ${darkMode ? 'text-slate-500' : 'text-slate-400'}`}>
                     <span className="w-1.5 h-1.5 rounded-full bg-[#00FFB2] opacity-60" />
                     {tech}

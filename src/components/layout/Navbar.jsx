@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sun, Moon, Menu, X, Zap } from 'lucide-react'
+import { Sun, Moon, Menu, X, Zap, FileText } from 'lucide-react'
 
 const navLinks = [
   { label: 'About', href: '#about' },
@@ -26,9 +26,18 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
   const handleNavClick = (href) => {
     setMenuOpen(false)
     if (href.startsWith('#')) {
-      const el = document.querySelector(href)
-      if (el) el.scrollIntoView({ behavior: 'smooth' })
+      if (location.pathname !== '/') {
+        window.location.href = `/${href}`
+      } else {
+        const el = document.querySelector(href)
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      }
     }
+  }
+
+  const handleLogoClick = () => {
+    setMenuOpen(false)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
@@ -46,7 +55,7 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
+        <Link to="/" onClick={handleLogoClick} className="flex items-center gap-2 group">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00FFB2] to-[#00C8FF] flex items-center justify-center shadow-lg shadow-[rgba(0,255,178,0.3)] group-hover:scale-110 transition-transform duration-300">
             <Zap size={16} className="text-dark-900" strokeWidth={2.5} />
           </div>
@@ -90,6 +99,20 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
 
         {/* Actions */}
         <div className="flex items-center gap-3">
+          <a
+            href="/MUTHUKUMAR-RESUME.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`hidden md:flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-lg border transition-all duration-200 ${
+              darkMode
+                ? 'border-white/10 text-slate-300 hover:text-[#00FFB2] hover:border-[#00FFB2]/40 hover:bg-white/5'
+                : 'border-slate-200 text-slate-700 hover:text-primary-600 hover:border-primary-300 hover:bg-black/5'
+            }`}
+          >
+            <FileText size={13} />
+            <span>Resume</span>
+          </a>
+
           <button
             onClick={toggleDarkMode}
             className={`p-2 rounded-lg transition-all duration-300 ${

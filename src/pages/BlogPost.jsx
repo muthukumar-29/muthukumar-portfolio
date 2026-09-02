@@ -22,6 +22,8 @@ export default function BlogPost({ darkMode }) {
   }
 
   const otherPosts = blogPosts.filter(p => p.slug !== slug).slice(0, 3)
+  // Strip top H1 title from markdown if present to prevent duplicate titles
+  const cleanContent = post.content.replace(/^#\s+[^\n]+\n+/, '')
 
   return (
     <main className={`min-h-screen pt-24 ${darkMode ? 'bg-dark-900' : 'bg-slate-50'}`}>
@@ -59,7 +61,7 @@ export default function BlogPost({ darkMode }) {
           </div>
 
           {/* Title */}
-          <h1 className={`font-display font-extrabold text-4xl md:text-5xl leading-tight mb-5 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+          <h1 className={`font-body font-bold text-3xl sm:text-4xl md:text-5xl leading-tight mb-5 tracking-tight ${darkMode ? 'text-white' : 'text-slate-900'}`}>
             {post.title}
           </h1>
 
@@ -90,63 +92,61 @@ export default function BlogPost({ darkMode }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className={`prose prose-lg max-w-none ${darkMode ? 'prose-invert' : ''}`}
-          style={{
-            '--tw-prose-body': darkMode ? '#94a3b8' : '#475569',
-            '--tw-prose-headings': darkMode ? '#f1f5f9' : '#0f172a',
-            '--tw-prose-code': '#00FFB2',
-            '--tw-prose-pre-bg': darkMode ? '#0a1510' : '#f8fafc',
-            '--tw-prose-links': '#00FFB2',
-          }}
+          className="max-w-none"
         >
-          <style>{`
-            .prose { line-height: 1.9; }
-            .prose p { margin-bottom: 1.5em; }
-            .prose h2 {
-              font-family: 'Syne', sans-serif;
-              font-weight: 800;
-              margin-top: 2.5em;
-              margin-bottom: 0.9em;
-            }
-            .prose h3 {
-              font-family: 'Syne', sans-serif;
-              font-weight: 700;
-              margin-top: 2em;
-              margin-bottom: 0.75em;
-            }
-            .prose ul, .prose ol { margin-top: 0.75em; margin-bottom: 1.5em; }
-            .prose li { margin-bottom: 0.6em; line-height: 1.8; }
-            .prose hr { margin-top: 2.5em; margin-bottom: 2.5em; }
-            .prose code:not(pre code) {
-              background: rgba(0,255,178,0.1);
-              color: #00FFB2;
-              padding: 2px 6px;
-              border-radius: 4px;
-              font-family: 'JetBrains Mono', monospace;
-              font-size: 0.85em;
-            }
-            .prose pre {
-              background: ${darkMode ? '#0A1510' : '#f8fafc'};
-              border: 1px solid ${darkMode ? 'rgba(255,255,255,0.06)' : '#e2e8f0'};
-              border-radius: 12px;
-              margin-top: 1.5em;
-              margin-bottom: 2em;
-            }
-            .prose a { color: #00FFB2; text-decoration: none; }
-            .prose a:hover { text-decoration: underline; }
-            .prose strong { color: ${darkMode ? '#e2e8f0' : '#1e293b'}; }
-            .prose ul li::marker { color: #00FFB2; }
-            .prose ol li::marker { color: #00FFB2; }
-            .prose blockquote {
-              border-left-color: #00FFB2;
-              background: rgba(0,255,178,0.05);
-              border-radius: 0 8px 8px 0;
-              padding: 20px 24px;
-              margin-top: 1.5em;
-              margin-bottom: 1.5em;
-            }
-          `}</style>
-          <ReactMarkdown>{post.content}</ReactMarkdown>
+          <ReactMarkdown
+            components={{
+              h1: ({ node, ...props }) => (
+                <h1 className={`font-body font-bold text-3xl md:text-4xl mt-10 mb-4 tracking-tight ${darkMode ? 'text-slate-100' : 'text-slate-900'}`} {...props} />
+              ),
+              h2: ({ node, ...props }) => (
+                <h2 className={`font-body font-bold text-2xl md:text-3xl mt-10 mb-4 pb-2 border-b ${darkMode ? 'border-white/10 text-slate-100' : 'border-slate-200 text-slate-900'}`} {...props} />
+              ),
+              h3: ({ node, ...props }) => (
+                <h3 className={`font-body font-bold text-xl md:text-2xl mt-8 mb-3 ${darkMode ? 'text-slate-200' : 'text-slate-800'}`} {...props} />
+              ),
+              p: ({ node, ...props }) => (
+                <p className={`font-body text-base md:text-lg leading-relaxed mb-6 ${darkMode ? 'text-slate-300' : 'text-slate-700'}`} {...props} />
+              ),
+              ul: ({ node, ...props }) => (
+                <ul className="list-disc list-outside pl-6 mb-6 space-y-2.5" {...props} />
+              ),
+              ol: ({ node, ...props }) => (
+                <ol className="list-decimal list-outside pl-6 mb-6 space-y-2.5" {...props} />
+              ),
+              li: ({ node, ...props }) => (
+                <li className={`font-body text-base md:text-lg leading-relaxed pl-1 ${darkMode ? 'text-slate-300' : 'text-slate-700'}`} {...props} />
+              ),
+              strong: ({ node, ...props }) => (
+                <strong className={`font-semibold ${darkMode ? 'text-white' : 'text-slate-900'}`} {...props} />
+              ),
+              a: ({ node, ...props }) => (
+                <a className="text-[#00FFB2] hover:underline font-medium" target="_blank" rel="noopener noreferrer" {...props} />
+              ),
+              code: ({ node, inline, className, children, ...props }) => {
+                if (inline || !className) {
+                  return (
+                    <code className={`px-2 py-0.5 rounded text-sm font-mono ${darkMode ? 'bg-[rgba(0,255,178,0.12)] text-[#00FFB2]' : 'bg-slate-200 text-slate-800'}`} {...props}>
+                      {children}
+                    </code>
+                  )
+                }
+                return (
+                  <pre className={`p-4 rounded-xl overflow-x-auto text-sm font-mono my-6 border ${darkMode ? 'bg-[#0A1510] border-white/10 text-slate-200' : 'bg-slate-900 border-slate-800 text-slate-100'}`} {...props}>
+                    <code>{children}</code>
+                  </pre>
+                )
+              },
+              blockquote: ({ node, ...props }) => (
+                <blockquote className={`pl-4 py-3 my-6 border-l-4 border-[#00FFB2] rounded-r-xl ${darkMode ? 'bg-dark-800/80 text-slate-300' : 'bg-slate-100 text-slate-700'}`} {...props} />
+              ),
+              hr: ({ node, ...props }) => (
+                <hr className={`my-8 ${darkMode ? 'border-white/10' : 'border-slate-200'}`} {...props} />
+              ),
+            }}
+          >
+            {cleanContent}
+          </ReactMarkdown>
         </motion.article>
       </div>
 

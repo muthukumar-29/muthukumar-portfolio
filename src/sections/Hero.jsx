@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { ArrowRight, ChevronDown, Sparkles } from 'lucide-react'
+import { ArrowRight, ChevronDown, Sparkles, FileText, Download } from 'lucide-react'
 
 // Tech Icon SVGs as inline components
 const TechIcons = {
@@ -87,12 +87,12 @@ const floatingIcons = [
   { Icon: TechIcons.OpenAI, x: '40%', y: '5%', size: 42, delay: 0.3, duration: 9.5, label: 'OpenAI' },
 ]
 
-function FloatingIcon({ Icon, x, y, size, delay, duration, label, mouseX, mouseY }) {
+function FloatingIcon({ Icon, x, y, size, delay, duration, label, mouseX, mouseY, darkMode }) {
   const parallaxStrength = 0.02
 
   return (
     <motion.div
-      className="floating-icon"
+      className="floating-icon hidden sm:block"
       style={{ left: x, top: y }}
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{
@@ -128,19 +128,14 @@ function FloatingIcon({ Icon, x, y, size, delay, duration, label, mouseX, mouseY
         />
         <motion.div
           className="absolute inset-0 rounded-xl"
-          animate={{
-            boxShadow: [
-              '0 0 8px rgba(0,255,178,0.08)',
-              '0 0 20px rgba(0,255,178,0.2)',
-              '0 0 8px rgba(0,255,178,0.08)',
-            ],
+          style={{
+            background: darkMode ? 'rgba(15, 23, 42, 0.75)' : 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(12px)',
+            border: darkMode ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.08)',
           }}
-          transition={{ duration: duration * 0.6, delay, repeat: Infinity }}
         />
-        <Icon />
-        {/* Label tooltip */}
-        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-mono text-[rgba(0,255,178,0.5)] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {label}
+        <div className="relative z-10 w-full h-full p-2.5 flex items-center justify-center">
+          <Icon />
         </div>
       </div>
     </motion.div>
@@ -149,38 +144,48 @@ function FloatingIcon({ Icon, x, y, size, delay, duration, label, mouseX, mouseY
 
 export default function Hero({ darkMode }) {
   const containerRef = useRef(null)
+
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const rect = containerRef.current?.getBoundingClientRect()
-      if (!rect) return
-      mouseX.set((e.clientX - rect.left - rect.width / 2) / rect.width)
-      mouseY.set((e.clientY - rect.top - rect.height / 2) / rect.height)
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+  const handleMouseMove = (e) => {
+    if (!containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    const centerX = rect.left + rect.width / 2
+    const centerY = rect.top + rect.height / 2
+    mouseX.set((e.clientX - centerX) / (rect.width / 2))
+    mouseY.set((e.clientY - centerY) / (rect.height / 2))
+  }
 
   const handleScroll = () => {
     document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })
   }
 
   const containerVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.12 } },
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
   }
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+    },
   }
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      onMouseMove={handleMouseMove}
+      className="relative min-h-screen flex items-center justify-center pt-28 md:pt-36 pb-20 overflow-hidden"
     >
       {/* Background grid */}
       <div
@@ -202,7 +207,7 @@ export default function Hero({ darkMode }) {
 
       {/* Floating Tech Icons */}
       {floatingIcons.map((icon, i) => (
-        <FloatingIcon key={i} {...icon} mouseX={mouseX} mouseY={mouseY} />
+        <FloatingIcon key={i} {...icon} mouseX={mouseX} mouseY={mouseY} darkMode={darkMode} />
       ))}
 
       {/* Particle dots */}
@@ -229,19 +234,19 @@ export default function Hero({ darkMode }) {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 text-center px-6 max-w-5xl mx-auto"
+        className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto w-full"
       >
         {/* Badge */}
-        <motion.div variants={itemVariants} className="flex justify-center mb-8">
-          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-mono ${
+        <motion.div variants={itemVariants} className="flex justify-center mb-6 sm:mb-8">
+          <div className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border text-[11px] sm:text-xs font-mono max-w-full ${
             darkMode
               ? 'border-[rgba(0,255,178,0.3)] bg-[rgba(0,255,178,0.06)] text-[#00FFB2]'
               : 'border-primary-300 bg-primary-50 text-primary-700'
           }`}>
-            <Sparkles size={12} />
-            <span>Full Stack Dev · AI Automation Developer · Automaitee</span>
+            <Sparkles size={12} className="flex-shrink-0" />
+            <span className="truncate">Automation Specialist · Selfera</span>
             <motion.span
-              className="inline-block w-2 h-2 rounded-full bg-[#00FFB2]"
+              className="inline-block w-2 h-2 rounded-full bg-[#00FFB2] flex-shrink-0"
               animate={{ opacity: [1, 0.3, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             />
@@ -250,7 +255,7 @@ export default function Hero({ darkMode }) {
 
         {/* Name */}
         <motion.div variants={itemVariants}>
-          <h1 className={`font-display font-extrabold text-6xl md:text-8xl lg:text-9xl leading-none mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+          <h1 className={`font-display font-extrabold text-4xl sm:text-6xl md:text-8xl lg:text-9xl leading-none mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-slate-900'}`}>
             Muthu
             <br />
             <span className="gradient-accent">kumar</span>
@@ -259,25 +264,35 @@ export default function Hero({ darkMode }) {
 
         {/* Role & description */}
         <motion.div variants={itemVariants}>
-          <p className={`font-body text-lg md:text-xl max-w-2xl mx-auto mt-6 leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-            Full Stack Developer & AI Automation Developer. Building intelligent workflows,
+          <p className={`font-body text-sm sm:text-lg md:text-xl max-w-2xl mx-auto mt-4 sm:mt-6 leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            Automation Specialist. Building intelligent workflows, full-stack applications,
             agents, and integrations that transform how businesses operate — from idea to{' '}
             <span className={darkMode ? 'text-[#00FFB2]' : 'text-primary-600'}>production</span>.
           </p>
         </motion.div>
 
         {/* CTA Buttons */}
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10 w-full max-w-sm sm:max-w-none mx-auto px-2">
           <button
             onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn-primary group"
+            className="btn-primary w-full sm:w-auto justify-center group"
           >
             View Projects
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
           </button>
+          <a
+            href="/MUTHUKUMAR-RESUME.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-outline w-full sm:w-auto justify-center flex items-center gap-2 group"
+          >
+            <FileText size={16} />
+            Resume
+            <Download size={14} className="group-hover:translate-y-0.5 transition-transform duration-200" />
+          </a>
           <button
             onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn-outline"
+            className="btn-outline w-full sm:w-auto justify-center"
           >
             Contact Me
           </button>

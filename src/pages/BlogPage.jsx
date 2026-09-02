@@ -32,7 +32,7 @@ export default function BlogPage({ darkMode }) {
             <div className="w-8 h-0.5 bg-[#00FFB2]" />
           </div>
           <h1 className={`font-display font-extrabold text-5xl md:text-6xl mb-6 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-            Blog & Tutorials
+            Blogs
           </h1>
           <p className={`text-lg max-w-2xl mx-auto font-body ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
             Deep dives into AI automation, n8n workflows, API integrations, and the future of intelligent software.

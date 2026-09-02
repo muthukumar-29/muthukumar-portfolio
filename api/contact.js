@@ -70,7 +70,7 @@ function buildAutoReplyHtml({ name }) {
       <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
         <tr>
           <td style="background:linear-gradient(135deg,#00FFB2,#00C8FF);padding:32px 40px;text-align:center;">
-            <h1 style="margin:0;color:#050D0A;font-size:22px;font-weight:800;">⚡ Message Received!</h1>
+            <h1 style="margin:0;color:#050D0A;font-size:22px;font-weight:800;">Message Received!</h1>
             <p style="margin:6px 0 0;color:rgba(5,13,10,0.6);font-size:13px;">muthukumar.dev</p>
           </td>
         </tr>
@@ -87,7 +87,7 @@ function buildAutoReplyHtml({ name }) {
             </p>
             <div style="background:#f1fdf9;border:1px solid #a7f3d0;border-radius:12px;padding:16px 20px;">
               <p style="margin:0;color:#065f46;font-size:14px;font-weight:600;">— Muthukumar M</p>
-              <p style="margin:4px 0 0;color:#047857;font-size:13px;">AI Automation Developer · Automaitee</p>
+              <p style="margin:4px 0 0;color:#047857;font-size:13px;">Automation Specialist · Selfera Pvt Ltd</p>
             </div>
           </td>
         </tr>
